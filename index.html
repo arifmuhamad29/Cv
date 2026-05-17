@@ -3,881 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhamad Arif Setiawan | Engineering Portfolio</title>
-    <style>
-        :root {
-            --bg-base: #0a0c10;
-            --bg-surface: rgba(26, 29, 36, 0.7);
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --accent-primary: #f59e0b;
-            --accent-secondary: #0ea5e9;
-            --border-color: rgba(51, 65, 85, 0.5);
-            --font-main: 'Segoe UI', system-ui, sans-serif;
-            --font-mono: 'Courier New', Courier, monospace;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-base);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            background-image: 
-                radial-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
-                radial-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            overflow-x: hidden;
-            background-attachment: fixed;
-        }
-
-        ::selection {
-            background: var(--accent-secondary);
-            color: #fff;
-        }
-
-        /* --- SCROLL PROGRESS BAR --- */
-        #scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: var(--accent-primary);
-            width: 0%;
-            z-index: 9999;
-            box-shadow: 0 0 10px var(--accent-primary), 0 0 20px var(--accent-primary);
-            transition: width 0.1s ease;
-        }
-
-        /* --- SWITCH BAHASA --- */
-        .lang-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 1000;
-        }
-        .lang-btn {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        .lang-btn:hover {
-            border-color: var(--accent-secondary);
-            color: var(--accent-secondary);
-        }
-        /* Menyembunyikan banner bawaan sistem penerjemah */
-        body { top: 0 !important; }
-        .skiptranslate iframe { display: none !important; }
-        #google_translate_element { position: absolute; opacity: 0; z-index: -1; pointer-events: none; }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* --- HEADER / HERO SECTION --- */
-        header {
-            padding: 100px 0 50px 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-
-        .profile-photo-container {
-            flex-shrink: 0;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid var(--accent-primary);
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
-            animation: pulseGlow 4s infinite alternate;
-            position: relative;
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.2), inset 0 0 10px rgba(245, 158, 11, 0.2); border-color: rgba(245, 158, 11, 0.5); }
-            100% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.6), inset 0 0 20px rgba(245, 158, 11, 0.4); border-color: rgba(245, 158, 11, 1); }
-        }
-
-        .profile-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .profile-photo-container:hover .profile-photo {
-            transform: scale(1.1);
-        }
-
-        .header-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .sys-status-wrapper {
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .sys-status {
-            font-family: var(--font-mono);
-            color: var(--accent-secondary);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 1px solid var(--accent-secondary);
-            padding: 5px 10px;
-            border-radius: 3px;
-            background: rgba(14, 165, 233, 0.05);
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid var(--accent-secondary);
-            animation: typing 2.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0; padding-left: 0; padding-right: 0; color: transparent; border-color: transparent;}
-            to { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-right-color: transparent }
-            50% { border-right-color: var(--accent-secondary); }
-        }
-
-        /* Glitch Effect on Name */
-        header h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 5px;
-            color: #ffffff;
-            animation: fadeInDown 1s ease-out;
-            position: relative;
-            display: inline-block;
-            cursor: crosshair;
-        }
-
-        header h1:active, header h1:hover {
-            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-            color: var(--accent-secondary);
-            text-shadow: 2px 0px var(--accent-primary), -2px 0px #ff00c8;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
-        }
-
-        header h2 {
-            font-size: 1.5rem;
-            color: var(--accent-primary);
-            font-weight: 400;
-            margin-bottom: 25px;
-            animation: fadeInDown 1.2s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .summary {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 800px;
-            border-left: 3px solid var(--accent-primary);
-            padding-left: 20px;
-            margin-bottom: 30px;
-        }
-
-        .contact-bar {
-            display: flex;
-            gap: 15px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-surface);
-            backdrop-filter: blur(5px);
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-        }
-
-        a.contact-item {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        a.contact-item:hover, .contact-item:hover {
-            border-color: var(--accent-secondary);
-            background: rgba(14, 165, 233, 0.1);
-            color: var(--accent-secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.15);
-        }
-
-        /* --- SECTION STYLES --- */
-        section {
-            margin-bottom: 70px;
-        }
-
-        .section-title {
-            font-family: var(--font-mono);
-            font-size: 1.2rem;
-            color: var(--accent-secondary);
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .section-title::before {
-            content: "[";
-            color: var(--accent-primary);
-            margin-right: -10px;
-        }
-        .section-title::after {
-            content: "]";
-            color: var(--accent-primary);
-            margin-left: 10px;
-            flex: 1;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: "";
-            height: 1px;
-            background: linear-gradient(90deg, var(--border-color), transparent);
-            margin-left: 15px;
-        }
-
-        /* --- TECH/SCI-FI CARDS (Timeline & Skills & Portfolio) --- */
-        .timeline-item, .skill-category, .portfolio-card {
-            background: var(--bg-surface);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            margin-bottom: 20px;
-            position: relative;
-            border-left: 4px solid var(--accent-primary);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            /* Chamfered Corners */
-            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
-        }
-
-        .timeline-item:hover, .skill-category:hover, .portfolio-card:hover {
-            border-left-color: var(--accent-secondary);
-            transform: translateX(8px);
-            box-shadow: -5px 5px 20px rgba(0,0,0,0.4), inset 0 0 15px rgba(14, 165, 233, 0.05);
-            background: rgba(26, 29, 36, 0.9);
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .timeline-item h3 {
-            font-size: 1.3rem;
-            color: #fff;
-            transition: color 0.3s ease;
-        }
-
-        .timeline-item:hover h3 {
-            color: var(--accent-secondary);
-        }
-
-        .timeline-item .company {
-            color: var(--accent-primary);
-            font-weight: 600;
-            display: block;
-            margin-top: 5px;
-        }
-
-        .timeline-item .date {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            background: rgba(255,255,255,0.05);
-            padding: 4px 8px;
-            border-radius: 3px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .timeline-item ul {
-            list-style-type: none;
-            padding-left: 5px;
-            color: var(--text-secondary);
-        }
-
-        .timeline-item ul li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
-        }
-        
-        .timeline-item ul li::before {
-            content: ">>";
-            position: absolute;
-            left: 0;
-            color: var(--accent-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-        }
-
-        /* --- SKILLS & SOFT SKILLS GRID --- */
-        .skills-grid-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .skills-grid-wrapper {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .skill-category h4 {
-            color: #fff;
-            margin-bottom: 15px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .tag {
-            background: rgba(14, 165, 233, 0.05);
-            color: var(--accent-secondary);
-            border: 1px solid rgba(14, 165, 233, 0.3);
-            padding: 5px 12px;
-            font-size: 0.85rem;
-            font-family: var(--font-mono);
-            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-            transition: all 0.3s ease;
-        }
-
-        .tag:hover {
-            background: var(--accent-secondary);
-            color: #fff;
-            box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
-        }
-
-        .progress-item {
-            margin-bottom: 15px;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-primary);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            font-family: var(--font-mono);
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 6px;
-            background: rgba(255,255,255,0.05);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            width: 0;
-            transition: width 1.5s cubic-bezier(0.1, 0.8, 0.3, 1);
-            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-        }
-
-        /* --- PORTFOLIO GRID WITH LASER SCAN --- */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .portfolio-card {
-            border-left: none;
-            border-top: 4px solid var(--accent-primary);
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-8px);
-            border-top-color: var(--accent-secondary);
-        }
-
-        .portfolio-img-wrapper {
-            width: 100%;
-            height: 180px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            background: #000;
-            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
-        }
-
-        .portfolio-img-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 2px;
-            background: var(--accent-secondary);
-            box-shadow: 0 0 15px 2px var(--accent-secondary);
-            animation: scanline 3s linear infinite;
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        @keyframes scanline {
-            0% { top: -5%; opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { top: 105%; opacity: 0; }
-        }
-
-        .portfolio-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease;
-            opacity: 0.8;
-        }
-
-        .portfolio-card:hover .portfolio-img-wrapper img {
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-        .portfolio-card h3 {
-            color: #fff;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        .portfolio-card p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        /* --- SCROLL ANIMATION CLASSES --- */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px dashed var(--border-color);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .header-content { justify-content: center; text-align: center; gap: 20px; }
-            .summary { border-left: none; padding-left: 0; margin: 0 auto 30px auto; }
-            .contact-bar { justify-content: center; }
-            header h1 { font-size: 2.8rem; }
-        }
-    </style>
+    <title>Muhamad Arif Setiawan | CAD/CAM Engineer</title>
+    <meta name="description" content="Portfolio of Muhamad Arif Setiawan, a Computer Science graduate specializing in CAD/CAM, 3D modeling, and CNC programming for precision engineering.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Background Particles -->
+    <div id="particles-js"></div>
 
-    <div id="scroll-progress"></div>
-    <div id="google_translate_element"></div>
-
-    <div class="container">
-        <header>
-            <div class="lang-switcher">
-                <button class="lang-btn" onclick="translateTo('id')">ID</button>
-                <button class="lang-btn" onclick="translateTo('en')">EN</button>
-                <button class="lang-btn" onclick="translateTo('ko')">KO</button>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">M<span class="text-primary">.</span>Arif</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
+            <a href="#contact" class="btn btn-primary">Contact Me</a>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text-wrapper">
+                <p class="greeting reveal">Hello, I'm</p>
+                <h1 class="name reveal">Muhamad Arif <span class="text-primary">Setiawan</span></h1>
+                <h2 class="title reveal"><span class="typewrite" data-period="2000" data-type='[ "CAD/CAM Engineer", "CNC Programmer", "3D Modeler", "Manufacturing Expert" ]'>
+                    <span class="wrap"></span>
+                </span></h2>
+                <p class="description reveal">
+                    Specializing in precision 3D modeling, manufacturing workflows, and automated production systems. Merging computer science with mechanical engineering.
+                </p>
+                <div class="hero-actions reveal">
+                    <a href="#experience" class="btn btn-primary">View My Work</a>
+                    <a href="#about" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper reveal">
+                <div class="profile-frame">
+                    <!-- Placeholder, save your image as profile.jpg in this folder -->
+                    <img src="profile.jpg" alt="Muhamad Arif Setiawan" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about section-padding" id="about">
+        <div class="container">
+            <h2 class="section-title reveal">About <span class="text-primary">Me</span></h2>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p>Saya merupakan lulusan Sarjana Komputer dari Universitas Sains dan Komputer (2023) dengan latar belakang Teknik Pemesinan dari SMK. Saya memiliki kompetensi unggul di bidang <strong>CAD/CAM, pemodelan 3D, dan proses manufaktur tooling.</strong></p>
+                    <p>Berpengalaman dalam pembuatan desain teknik menggunakan software CAD (Rhinoceros), inspeksi outsole, serta penyusunan program CAM untuk mesin 3D printing. Saya memiliki pemahaman mendalam tentang toleransi, kualitas produksi, dan alur proses manufaktur.</p>
+                    <p>Terbiasa bekerja dengan presisi, cepat belajar, dan siap berkontribusi dalam pengembangan sistem produksi berbasis teknologi CAD/CAM dan otomasi industri.</p>
+                </div>
+                <div class="about-stats reveal">
+                    <div class="stat-card">
+                        <span class="stat-number">4+</span>
+                        <span class="stat-text">Tahun Pengalaman CNC & CAM</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3D</span>
+                        <span class="stat-text">Ahli Desain Tooling & Outsole</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience section-padding bg-alt" id="experience">
+        <div class="container">
+            <h2 class="section-title reveal">Professional <span class="text-primary">Experience</span></h2>
             
-            <div class="sys-status-wrapper">
-                <div class="sys-status">SYS.STATUS: ONLINE | ENGINEER_PROFILE | DATA_LINK: ESTABLISHED</div>
+            <div class="timeline">
+                <!-- Job 1 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="date">Februari 2025 - Sekarang</span>
+                        <h3 class="job-title">Bottom Tooling Staff</h3>
+                        <h4 class="company">PT. Hwaseung Indonesia 2 Pati</h4>
+                        <ul class="job-desc">
+                            <li><strong>Desain dan Pemodelan Tooling 3D:</strong> Menggunakan software CAD (Rhinoceros) sesuai spesifikasi outsole dan standar manufaktur.</li>
+                            <li><strong>Inspeksi Teknis Outsole:</strong> Berdasarkan parameter dimensi, kontur, dan toleransi desain.</li>
+                            <li><strong>Program CAM:</strong> Menyusun program untuk proses 3D printing (slicing, toolpath, parameter mesin).</li>
+                            <li><strong>Simulasi & Verifikasi:</strong> Melakukan simulasi desain CAD untuk meminimalkan defect sebelum cetak.</li>
+                            <li><strong>Trial Printing & Optimasi:</strong> Evaluasi hasil cetak untuk mencapai kualitas tooling optimal.</li>
+                            <li><strong>Dokumentasi Data:</strong> Mengelola data CAD/CAM dan laporan hasil inspeksi.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="date">November 2021 - Sekarang</span>
+                        <h3 class="job-title">CNC Programmer</h3>
+                        <h4 class="company">PT. Hartono Istana Teknologi (Polytron)</h4>
+                        <ul class="job-desc">
+                            <li><strong>Membuat Program CNC:</strong> Menyusun kode kontrol untuk memproduksi komponen sesuai keinginan.</li>
+                            <li><strong>Pengujian & Debugging:</strong> Memastikan program berfungsi baik dan melakukan debugging.</li>
+                            <li><strong>Pemrograman Lanjutan:</strong> Menyempurnakan program untuk efisiensi dan kualitas produk.</li>
+                            <li><strong>Pengaturan Mesin:</strong> Menyesuaikan kecepatan potong dan parameter pemotongan presisi.</li>
+                            <li><strong>Kolaborasi Tim:</strong> Bekerja dengan tim Molding Workshop untuk pemahaman spesifikasi produk.</li>
+                            <li><strong>Pemeliharaan Perangkat Lunak:</strong> Memelihara dan memperbarui software CNC.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="date">Juli 2019 – November 2021</span>
+                        <h3 class="job-title">Molding Workshop</h3>
+                        <h4 class="company">PT. Hartono Istana Teknologi (Polytron)</h4>
+                        <ul class="job-desc">
+                            <li><strong>Pemantauan Proses:</strong> Memantau pencetakan untuk memastikan kualitas produk.</li>
+                            <li><strong>Perbaikan & Pemeliharaan:</strong> Memperbaiki komponen rusak, serta pemeliharaan rutin mesin pencetakan.</li>
+                            <li><strong>Pemeliharaan Overhaul:</strong> Menjaga kondisi mesin agar tetap baik saat digunakan.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Job 4 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="date">Mei 2017 – Februari 2019</span>
+                        <h3 class="job-title">CNC Operator</h3>
+                        <h4 class="company">PT. DIAMETRAL INVOLUTE</h4>
+                        <ul class="job-desc">
+                            <li><strong>Mempersiapkan & Memuat Program:</strong> Memeriksa mesin, memasang alat potong, memuat program CNC.</li>
+                            <li><strong>Mengawasi Produksi:</strong> Memantau kecepatan pemotongan dan kualitas permukaan.</li>
+                            <li><strong>Troubleshooting & Pemeliharaan:</strong> Mengidentifikasi masalah dan melakukan pemeliharaan rutin mesin.</li>
+                            <li><strong>Pemeriksaan Kualitas:</strong> Memastikan produk sesuai spesifikasi.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="header-content">
-                <div class="profile-photo-container">
-                    <img src="foto-profil.jpg" alt="Muhamad Arif Setiawan" class="profile-photo">
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio section-padding" id="portfolio">
+        <div class="container">
+            <h2 class="section-title reveal">Featured <span class="text-primary">Projects</span></h2>
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-img-box">
+                        <img src="port_outsole.png" alt="3D Shoe Outsole Design">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tech">Rhinoceros 3D / CAD</span>
+                            <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Futuristic Outsole Prototype</h3>
+                        <p>High-precision 3D modeling for industrial shoe manufacturing, ensuring perfect contouring and ergonomic tolerances.</p>
+                    </div>
                 </div>
                 
-                <div class="header-text">
-                    <h1 title="Click for System Glitch">Muhamad Arif Setiawan</h1>
-                    <h2>CAD/CAM & System Engineer</h2>
-                    <p class="summary">
-                        Lulusan Sarjana Komputer dengan latar belakang Teknik Pemesinan. Memiliki kompetensi spesifik di bidang CAD/CAM, pemodelan 3D, dan proses manufaktur tooling. Terbiasa bekerja dengan presisi tinggi, mengintegrasikan teknologi perangkat lunak dan otomasi perangkat keras untuk optimalisasi sistem produksi.
-                    </p>
-                    <div class="contact-bar">
-                        <div class="contact-item">📍 Semarang / Pati, Jawa Tengah</div>
-                        <a href="mailto:muhamadarifsetiawan.2910@gmail.com" class="contact-item">✉️ muhamadarifsetiawan.2910@gmail.com</a>
-                        <a href="https://wa.me/6285799045263" target="_blank" rel="noopener noreferrer" class="contact-item">📞 +62 857-9904-5263</a>
+                <!-- Project 2 -->
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-img-box">
+                        <img src="port_cnc.png" alt="CNC Milling Process">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tech">Mastercam / CNC Programming</span>
+                            <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Automated Toolpath Simulation</h3>
+                        <p>Advanced G-Code generation and dynamic toolpath optimization for efficient metal milling and reduced cycle time.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-img-box">
+                        <img src="port_metal.png" alt="Precision Metal Component">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tech">Manufacturing & Quality Control</span>
+                            <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Precision Aluminum Component</h3>
+                        <p>Final machined product featuring exact chamfers, smooth surface finishes, and strict dimension adherence.</p>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <section>
-            <h2 class="section-title fade-in">01. Pengalaman Profesional</h2>
-            
-            <div class="timeline-item fade-in">
-                <div class="timeline-header">
-                    <div>
-                        <h3>Bottom Tooling Staff</h3>
-                        <span class="company">PT. Hwaseung Indonesia 2 Pati</span>
-                    </div>
-                    <span class="date">Feb 2025 - Sekarang</span>
+    <!-- Education Section -->
+    <section class="education section-padding" id="education">
+        <div class="container">
+            <h2 class="section-title reveal">Education & <span class="text-primary">Background</span></h2>
+            <div class="edu-grid">
+                <div class="edu-card glass-card reveal">
+                    <div class="edu-icon">🎓</div>
+                    <h3 class="degree">Computer Science</h3>
+                    <h4 class="school">Universitas Sains dan Teknologi Komputer</h4>
+                    <span class="date">2019 - 2023</span>
+                    <p>Memperoleh dasar yang kuat dalam pemrograman (Java, Python, C++), struktur data, algoritma, rekayasa perangkat lunak, dan jaringan komputer. Mengembangkan kecintaan terhadap inovasi teknologi.</p>
                 </div>
-                <ul>
-                    <li>Melakukan desain dan pemodelan tooling 3D menggunakan software CAD (Rhinoceros).</li>
-                    <li>Menyusun program CAM untuk proses 3D printing (slicing, toolpath, parameter mesin).</li>
-                    <li>Melakukan simulasi, verifikasi desain, dan inspeksi teknis outsole berdasarkan dimensi serta toleransi.</li>
-                    <li>Melaksanakan trial printing dan optimasi parameter mesin guna meminimalkan defect cetak.</li>
-                </ul>
-            </div>
-
-            <div class="timeline-item fade-in">
-                <div class="timeline-header">
-                    <div>
-                        <h3>CNC Programmer</h3>
-                        <span class="company">PT. Hartono Istana Teknologi (Polytron)</span>
-                    </div>
-                    <span class="date">Nov 2021 - Feb 2025</span>
+                <div class="edu-card glass-card reveal">
+                    <div class="edu-icon">⚙️</div>
+                    <h3 class="degree">Teknik Pemesinan</h3>
+                    <h4 class="school">SMK Negeri 1 Windusari</h4>
+                    <span class="date">2014 - 2017</span>
+                    <p>Pemahaman komprehensif tentang sistem mekanik, operasi mesin CNC, dan pemeliharaan. Pemenang kompetisi CADD (Computer-Aided Design and Drafting). Menguasai interpretasi gambar teknis dan pengukuran presisi.</p>
                 </div>
-                <ul>
-                    <li>Menyusun dan mengembangkan program CNC untuk kontrol mesin produksi komponen.</li>
-                    <li>Melakukan pengujian, debugging, serta penyesuaian parameter kecepatan pemotongan dan alat potong.</li>
-                    <li>Berkolaborasi intensif dengan tim Molding Workshop untuk memastikan spesifikasi tercapai secara presisi.</li>
-                </ul>
             </div>
+        </div>
+    </section>
 
-            <div class="timeline-item fade-in">
-                <div class="timeline-header">
-                    <div>
-                        <h3>Molding Workshop</h3>
-                        <span class="company">PT. Hartono Istana Teknologi (Polytron)</span>
-                    </div>
-                    <span class="date">Jul 2019 - Nov 2021</span>
-                </div>
-                <ul>
-                    <li>Memantau proses pencetakan dan memastikan kualitas standar produk (Quality Control).</li>
-                    <li>Melakukan pemeliharaan preventif, perbaikan cepat, serta overhaul pada mesin cetak industri.</li>
-                </ul>
-            </div>
-
-            <div class="timeline-item fade-in">
-                <div class="timeline-header">
-                    <div>
-                        <h3>CNC Operator</h3>
-                        <span class="company">PT. Diametral Involute</span>
-                    </div>
-                    <span class="date">Mei 2017 - Feb 2019</span>
-                </div>
-                <ul>
-                    <li>Mempersiapkan mesin, memasang alat potong (tools setup), dan memuat program produksi.</li>
-                    <li>Mengawasi jalannya proses produksi, inspeksi kualitas permukaan, dan trouble-shooting mesin.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="section-title fade-in">02. Matrix Keahlian (Hard & Soft Skills)</h2>
-            <div class="skills-grid-wrapper">
-                
-                <div class="skill-category fade-in">
-                    <h4>[ HARDWARE & SOFTWARE SPECS ]</h4>
-                    
-                    <div style="margin-bottom: 5px; color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-mono);">CAD / CAM / MACHINING</div>
+    <!-- Skills Section -->
+    <section class="skills section-padding bg-alt" id="skills">
+        <div class="container">
+            <h2 class="section-title reveal">Technical <span class="text-primary">Expertise</span></h2>
+            <div class="skills-wrapper">
+                <div class="skill-category reveal">
+                    <h3>Software & Tools</h3>
                     <div class="skill-tags">
                         <span class="tag">Rhinoceros 3D</span>
                         <span class="tag">Mastercam 2019</span>
                         <span class="tag">Autodesk Inventor</span>
-                        <span class="tag">JG Creat (3D Print)</span>
-                        <span class="tag">CNC Mitsubishi</span>
+                        <span class="tag">Arduino IDE</span>
+                        <span class="tag">Microsoft Excel & Word</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category reveal">
+                    <h3>Engineering & Hardware</h3>
+                    <div class="skill-tags">
+                        <span class="tag">CNC Machine Mitsubishi</span>
+                        <span class="tag">JG Creat 3D Print</span>
                         <span class="tag">Lathe & Milling</span>
                         <span class="tag">Machine Welding</span>
+                        <span class="tag">Precision Measuring</span>
                     </div>
+                </div>
 
-                    <div style="margin-bottom: 5px; margin-top: 15px; color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-mono);">COMPUTER SCIENCE / OSINT</div>
+                <div class="skill-category reveal">
+                    <h3>Soft Skills & Languages</h3>
                     <div class="skill-tags">
-                        <span class="tag">Arduino IDE</span>
-                        <span class="tag">Java</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">C++</span>
-                        <span class="tag">Web Penetration</span>
-                        <span class="tag">Database Mgmt</span>
+                        <span class="tag">Problem Solving</span>
+                        <span class="tag">Team Work</span>
+                        <span class="tag">Public Speaking</span>
+                        <span class="tag">Bahasa Indonesia (Native)</span>
+                        <span class="tag">English (Proficient)</span>
                     </div>
                 </div>
-
-                <div class="skill-category fade-in">
-                    <h4>[ SOFT SKILLS & LANGUAGES ]</h4>
-                    
-                    <div class="progress-item">
-                        <div class="progress-label"><span>Problem Solving</span><span>Excellent</span></div>
-                        <div class="progress-track">
-                            <div class="progress-fill" data-width="95%"></div>
-                        </div>
-                    </div>
-
-                    <div class="progress-item">
-                        <div class="progress-label"><span>Team Work</span><span>Strong</span></div>
-                        <div class="progress-track">
-                            <div class="progress-fill" data-width="90%"></div>
-                        </div>
-                    </div>
-
-                    <div class="progress-item">
-                        <div class="progress-label"><span>Public Speaking</span><span>Good</span></div>
-                        <div class="progress-track">
-                            <div class="progress-fill" data-width="80%"></div>
-                        </div>
-                    </div>
-
-                    <div class="progress-item" style="margin-top: 25px;">
-                        <div class="progress-label"><span>Bahasa Indonesia</span><span>Native</span></div>
-                        <div class="progress-track">
-                            <div class="progress-fill" data-width="100%"></div>
-                        </div>
-                    </div>
-
-                    <div class="progress-item">
-                        <div class="progress-label"><span>English</span><span>TOEFL 420</span></div>
-                        <div class="progress-track">
-                            <div class="progress-fill" data-width="65%"></div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section>
-            <h2 class="section-title fade-in">03. Pendidikan & Sertifikasi</h2>
+    <!-- Contact Section -->
+    <section class="contact section-padding" id="contact">
+        <div class="container text-center">
+            <h2 class="section-title reveal">Get in <span class="text-primary">Touch</span></h2>
+            <p class="contact-desc reveal">Interested in collaborating or need a skilled CAD/CAM Engineer? Let's discuss how I can contribute to your next project.</p>
             
-            <div class="timeline-item fade-in">
-                <div class="timeline-header">
-                    <div>
-                        <h3>Teknik Pemesinan</h3>
-                        <span class="company">SMK Negeri 1 Windusari</span>
-                    </div>
-                    <span class="date">2014 - 2017</span>
+            <div class="contact-info reveal">
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <a href="mailto:muhamadarifsetiawan.2910@gmail.com">muhamadarifsetiawan.2910@gmail.com</a>
                 </div>
-                <ul>
-                    <li>Meraih Juara harapan 1 Lomba CADD (Computer-Aided Design and Drafting) Mechanical Fair UGM (2017).</li>
-                    <li>Meraih Juara harapan 1 Lomba CADD (Computer-Aided Design and Drafting) Tingkat Provinsi Jawa tengah (2016).</li>
-                    <li>Meraih Juara 1 Lomba CADD (Computer-Aided Design and Drafting) Tingkat Kabupaten Magelang (2016).</li>
-                    <li>Fokus pada sistem mekanik, operasi CNC, perawatan mesin, dan pembacaan gambar teknik presisi.</li>
-                </ul>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <a href="tel:+6285799045263">+62 857 9904 5263</a>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span>Semarang, Central Java, Indonesia</span>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="timeline-item fade-in">
-                <div class="timeline-header">
-                    <div>
-                        <h3>S1 Sistem Komputer (IPK: 3.40)</h3>
-                        <span class="company">Universitas Sains dan Teknologi Komputer</span>
-                    </div>
-                    <span class="date">2019 - 2023</span>
-                </div>
-                <ul>
-                    <li>Mendalami algoritma, rekayasa perangkat lunak, dan manajemen basis data.</li>
-                    <li>Fokus pada pengembangan software dan integrasi sistem jaringan komputer/IoT.</li>
-                </ul>
-            </div>
-        </section>
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 Muhamad Arif Setiawan. All rights reserved.</p>
+        </div>
+    </footer>
 
-        <section>
-            <h2 class="section-title fade-in">04. Key Projects & Portfolio</h2>
-            <div class="portfolio-grid">
-                
-                <div class="portfolio-card fade-in">
-                    <div class="portfolio-img-wrapper">
-                        <img src="portofolio-1.jpg" alt="IoT Smoke & Air Quality Detector">
-                    </div>
-                    <h3>IoT Smoke & Air Quality Detector</h3>
-                    <p>Penelitian skripsi mengenai sistem deteksi asap rokok dan Indeks Kualitas Udara (AQI) berbasis <i>Internet of Things</i> (IoT) untuk menanggulangi pelanggaran di area bebas asap rokok.</p>
-                    <div class="skill-tags" style="margin-bottom: 0;">
-                        <span class="tag">IoT</span>
-                        <span class="tag">Arduino</span>
-                        <span class="tag">Sensors</span>
-                    </div>
-                </div>
-
-                <div class="portfolio-card fade-in" style="transition-delay: 0.1s;">
-                    <div class="portfolio-img-wrapper">
-                        <img src="portofolio-2.jpg" alt="3D Outsole Tooling Design">
-                    </div>
-                    <h3>3D Outsole Tooling Design</h3>
-                    <p>Pemodelan dan perancangan <i>tooling</i> cetakan sepatu 3D industri skala besar. Mencakup proses inspeksi dimensi teknis, perancangan toleransi, dan verifikasi desain.</p>
-                    <div class="skill-tags" style="margin-bottom: 0;">
-                        <span class="tag">Rhinoceros 3D</span>
-                        <span class="tag">CAD</span>
-                    </div>
-                </div>
-
-                <div class="portfolio-card fade-in" style="transition-delay: 0.2s;">
-                    <div class="portfolio-img-wrapper">
-                        <img src="portofolio-3.jpg" alt="CAM & CNC Machining Matrix">
-                    </div>
-                    <h3>CAM & CNC Machining Matrix</h3>
-                    <p>Penyusunan kode dan optimasi jalur potong (<i>toolpath</i>) untuk produksi komponen presisi menggunakan mesin CNC Mitsubishi dan teknologi 3D Printing.</p>
-                    <div class="skill-tags" style="margin-bottom: 0;">
-                        <span class="tag">Mastercam</span>
-                        <span class="tag">JG Creat</span>
-                    </div>
-                </div>
-
-                <div class="portfolio-card fade-in" style="transition-delay: 0.3s;">
-                    <div class="portfolio-img-wrapper">
-                        <img src="portofolio-4.jpg" alt="Web Penetration & OSINT Automation">
-                    </div>
-                    <h3>Web Penetration & OSINT Automation</h3>
-                    <p>Pengumpulan data analitik (<i>Information Gathering</i>) dan skrip otomatisasi keamanan sistem industri. Mengintegrasikan teknologi pemantauan dengan perangkat OSINT untuk identifikasi anomali secara real-time.</p>
-                    <div class="skill-tags" style="margin-bottom: 0;">
-                        <span class="tag">Web Penetration</span>
-                        <span class="tag">OSINT Tools</span>
-                        <span class="tag">Python Scriping</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <footer>
-            <p>Data dikompilasi dari CV Muhamad Arif Setiawan &copy; 2026.<br>SYSTEM.END_OF_FILE</p>
-        </footer>
-    </div>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'id', includedLanguages: 'en,ko,id'}, 'google_translate_element');
-        }
-        function translateTo(lang) {
-            var selectField = document.querySelector("select.goog-te-combo");
-            if (selectField) {
-                selectField.value = lang;
-                selectField.dispatchEvent(new Event('change'));
-            }
-        }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            
-            // 1. Scroll Progress Bar
-            const progressBar = document.getElementById('scroll-progress');
-            window.addEventListener('scroll', () => {
-                const totalScroll = document.documentElement.scrollTop;
-                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scroll = `${totalScroll / windowHeight * 100}%`;
-                progressBar.style.width = scroll;
-            });
-
-            // 2. Intersection Observer for Fade-in & Progress Bars
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        
-                        const progressFills = entry.target.querySelectorAll('.progress-fill');
-                        progressFills.forEach(bar => {
-                            const width = bar.getAttribute('data-width');
-                            bar.style.width = width;
-                        });
-
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in').forEach((element) => {
-                observer.observe(element);
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
