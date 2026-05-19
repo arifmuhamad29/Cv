@@ -12,8 +12,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Background Particles -->
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-glow"></div>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="cad-ring ring1"></div>
+            <div class="cad-ring ring2"></div>
+            <div class="cad-ring ring3"></div>
+        </div>
+        <div class="loader-text">INITIALIZING CAD/CAM SYSTEM...</div>
+    </div>
+    <!-- Background Particles & G-Code Rain -->
     <div id="particles-js"></div>
+    <canvas id="gcode-rain"></canvas>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -36,26 +50,81 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero" id="home">
-        <div class="container hero-content">
-            <div class="hero-text-wrapper">
-                <p class="greeting reveal">Hello, I'm</p>
-                <h1 class="name reveal">Muhamad Arif <span class="text-primary">Setiawan</span></h1>
-                <h2 class="title reveal"><span class="typewrite" data-period="2000" data-type='[ "CAD/CAM Engineer", "CNC Programmer", "3D Modeler", "Manufacturing Expert" ]'>
-                    <span class="wrap"></span>
-                </span></h2>
-                <p class="description reveal">
+    <header class="hero-extreme" id="home">
+        <!-- Background Elements -->
+        <div class="hero-halo"></div>
+        <div class="hero-halo-outer"></div>
+        <img src="profile_cutout.png" alt="Muhamad Arif Setiawan" class="hero-portrait">
+
+        <div class="container hero-content-new">
+            <!-- Left Side -->
+            <div class="hero-left reveal">
+                <div class="badge-tech">• CAD/CAM ENGINEER</div>
+                <h1 class="name-new"><span class="glitch" data-text="Muhamad">Muhamad</span><br><span class="text-primary glitch" data-text="Arif Setiawan">Arif Setiawan</span></h1>
+                <p class="desc-new">
                     Specializing in precision 3D modeling, manufacturing workflows, and automated production systems. Merging computer science with mechanical engineering.
                 </p>
-                <div class="hero-actions reveal">
-                    <a href="#experience" class="btn btn-primary">View My Work</a>
-                    <a href="#about" class="btn btn-outline">Learn More</a>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-num text-primary">4+</span>
+                        <span class="stat-label">YEARS<br>EXPERIENCE</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num text-primary">3D</span>
+                        <span class="stat-label">TOOLING &<br>OUTSOLE</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num text-primary">CNC</span>
+                        <span class="stat-label">MASTER<br>PROGRAMMER</span>
+                    </div>
+                </div>
+                <div class="hero-socials">
+                    <a href="#" class="social-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                    <a href="#" class="social-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                    <a href="#" class="social-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                    <a href="#" class="social-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
                 </div>
             </div>
-            <div class="hero-image-wrapper reveal">
-                <div class="profile-frame">
-                    <!-- Placeholder, save your image as profile.jpg in this folder -->
-                    <img src="profile.jpg" alt="Muhamad Arif Setiawan" class="profile-img">
+
+            <!-- Center space for image -->
+            <div class="hero-center">
+            </div>
+
+            <!-- Right Side -->
+            <div class="hero-right reveal">
+                <div class="glass-panel core-status" data-tilt data-tilt-max="5">
+                    <div class="panel-header">
+                        <span class="panel-title">CORE STATUS</span>
+                        <span class="status-online"><span class="dot"></span> ONLINE</span>
+                    </div>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <div class="skill-info"><span>Mastercam</span><span>95%</span></div>
+                            <div class="progress"><div class="progress-fill" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-info"><span>Rhinoceros 3D</span><span>90%</span></div>
+                            <div class="progress"><div class="progress-fill" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-info"><span>CNC Programming</span><span>95%</span></div>
+                            <div class="progress"><div class="progress-fill" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-info"><span>Autodesk Inventor</span><span>85%</span></div>
+                            <div class="progress"><div class="progress-fill" style="width: 85%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-panel work-status" data-tilt data-tilt-max="5">
+                    <div class="work-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <div class="work-text">
+                        <h4>Available for Work</h4>
+                        <p>Open to engineering & CNC projects</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -231,7 +300,15 @@
                     <h3 class="degree">Teknik Pemesinan</h3>
                     <h4 class="school">SMK Negeri 1 Windusari</h4>
                     <span class="date">2014 - 2017</span>
-                    <p>Pemahaman komprehensif tentang sistem mekanik, operasi mesin CNC, dan pemeliharaan. Pemenang kompetisi CADD (Computer-Aided Design and Drafting). Menguasai interpretasi gambar teknis dan pengukuran presisi.</p>
+                    <p>Pemahaman komprehensif tentang sistem mekanik, operasi mesin CNC, dan pemeliharaan. Menguasai interpretasi gambar teknis dan pengukuran presisi.</p>
+                    <div style="margin-top: 1.5rem;">
+                        <h4 style="color: var(--primary); font-size: 1rem; margin-bottom: 0.8rem;">🏆 Prestasi CADD:</h4>
+                        <ul class="job-desc">
+                            <li><strong>Juara 1</strong> LKS CADD Kab. Magelang (2015)</li>
+                            <li><strong>Juara Harapan 2</strong> LKS CADD Prov. Jawa Tengah (2016)</li>
+                            <li><strong>Juara Harapan 2</strong> Mechanical Fair UGM CADD (2017)</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,36 +319,48 @@
         <div class="container">
             <h2 class="section-title reveal">Technical <span class="text-primary">Expertise</span></h2>
             <div class="skills-wrapper">
-                <div class="skill-category reveal">
+                <div class="skill-category glass-panel-extreme reveal" data-tilt data-tilt-max="5">
+                    <div class="tech-header">
+                        <span class="tech-code">// SYS.MOD.01</span>
+                        <span class="tech-label">SOFTWARE</span>
+                    </div>
                     <h3>Software & Tools</h3>
                     <div class="skill-tags">
-                        <span class="tag">Rhinoceros 3D</span>
-                        <span class="tag">Mastercam 2019</span>
-                        <span class="tag">Autodesk Inventor</span>
-                        <span class="tag">Arduino IDE</span>
-                        <span class="tag">Microsoft Excel & Word</span>
+                        <span class="tech-tag" data-text="Rhinoceros 3D">Rhinoceros 3D</span>
+                        <span class="tech-tag" data-text="Mastercam 2019">Mastercam 2019</span>
+                        <span class="tech-tag" data-text="Autodesk Inventor">Autodesk Inventor</span>
+                        <span class="tech-tag" data-text="Arduino IDE">Arduino IDE</span>
+                        <span class="tech-tag" data-text="Microsoft Excel & Word">Microsoft Excel & Word</span>
                     </div>
                 </div>
                 
-                <div class="skill-category reveal">
+                <div class="skill-category glass-panel-extreme reveal" data-tilt data-tilt-max="5">
+                    <div class="tech-header">
+                        <span class="tech-code">// SYS.MOD.02</span>
+                        <span class="tech-label">HARDWARE</span>
+                    </div>
                     <h3>Engineering & Hardware</h3>
                     <div class="skill-tags">
-                        <span class="tag">CNC Machine Mitsubishi</span>
-                        <span class="tag">JG Creat 3D Print</span>
-                        <span class="tag">Lathe & Milling</span>
-                        <span class="tag">Machine Welding</span>
-                        <span class="tag">Precision Measuring</span>
+                        <span class="tech-tag" data-text="CNC Mitsubishi">CNC Mitsubishi</span>
+                        <span class="tech-tag" data-text="JG Creat 3D Print">JG Creat 3D Print</span>
+                        <span class="tech-tag" data-text="Lathe & Milling">Lathe & Milling</span>
+                        <span class="tech-tag" data-text="Machine Welding">Machine Welding</span>
+                        <span class="tech-tag" data-text="Precision Measuring">Precision Measuring</span>
                     </div>
                 </div>
 
-                <div class="skill-category reveal">
+                <div class="skill-category glass-panel-extreme reveal" data-tilt data-tilt-max="5">
+                    <div class="tech-header">
+                        <span class="tech-code">// SYS.MOD.03</span>
+                        <span class="tech-label">CORE_SKILLS</span>
+                    </div>
                     <h3>Soft Skills & Languages</h3>
                     <div class="skill-tags">
-                        <span class="tag">Problem Solving</span>
-                        <span class="tag">Team Work</span>
-                        <span class="tag">Public Speaking</span>
-                        <span class="tag">Bahasa Indonesia (Native)</span>
-                        <span class="tag">English (Proficient)</span>
+                        <span class="tech-tag" data-text="Problem Solving">Problem Solving</span>
+                        <span class="tech-tag" data-text="Team Work">Team Work</span>
+                        <span class="tech-tag" data-text="Public Speaking">Public Speaking</span>
+                        <span class="tech-tag" data-text="Bahasa Indonesia (Native)">Bahasa Indonesia (Native)</span>
+                        <span class="tech-tag" data-text="English (Proficient)">English (Proficient)</span>
                     </div>
                 </div>
             </div>

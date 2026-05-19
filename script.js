@@ -140,4 +140,82 @@ window.onload = function() {
             "retina_detect": true
         });
     }
+
+    // Preloader Logic
+    const preloader = document.querySelector('.preloader');
+    setTimeout(() => {
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+    }, 1500); // 1.5 seconds loading screen
 };
+
+// Custom Cursor Logic
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorGlow = document.querySelector('.cursor-glow');
+
+window.addEventListener('mousemove', (e) => {
+    const posX = e.clientX;
+    const posY = e.clientY;
+
+    // Dot follows exactly
+    cursorDot.style.left = `${posX}px`;
+    cursorDot.style.top = `${posY}px`;
+
+    // Glow follows with a slight delay using requestAnimationFrame
+    cursorGlow.animate({
+        left: `${posX}px`,
+        top: `${posY}px`
+    }, { duration: 500, fill: "forwards" });
+});
+
+// G-Code Matrix Rain
+const canvas = document.getElementById('gcode-rain');
+if(canvas) {
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const gcodeSnippets = [
+        "G01", "Z-5.0", "F100", "M03", "S2000", "G90", "G54", "X0", "Y0", 
+        "T01", "M06", "G43", "H01", "Z50.", "G02", "R10.", 
+        "M08", "M30", "G28", "G91", "Z0", "G00", "X50."
+    ];
+
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for (let x = 0; x < columns; x++) {
+        drops[x] = 1;
+    }
+
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(7, 11, 20, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#00f0ff';
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = gcodeSnippets[Math.floor(Math.random() * gcodeSnippets.length)];
+            
+            // Draw text
+            ctx.fillText(text, i * fontSize * 4, drops[i] * fontSize);
+
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+
+    setInterval(drawMatrix, 50);
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
