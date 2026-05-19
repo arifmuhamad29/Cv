@@ -1,3 +1,9 @@
+// Force scroll to top on page reload
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 // Mobile Menu Toggle
 const hamburger = document.querySelector(".hamburger");
 const navLinks = document.querySelector(".nav-links");
@@ -175,7 +181,7 @@ const canvas = document.getElementById('gcode-rain');
 if(canvas) {
     const ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth;
+    canvas.width = document.body.clientWidth;
     canvas.height = window.innerHeight;
 
     const gcodeSnippets = [
